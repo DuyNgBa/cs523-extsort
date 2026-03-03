@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>External Sort - 24520382</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">EXTERNAL SORT visualization</div>
+            
+            <div class="control-group">
+                <label>RAM (Số phần tử)</label>
+                <input type="range" id="ramLimit" min="2" max="20" value="5">
+                <div id="ramVal" class="val-display">5 Elements</div>
+            </div>
+
+            <button onclick="generateSampleFile()" class="btn-side"><i class="fas fa-file-export"></i> Tạo File Mẫu</button>
+            
+            <div class="file-upload-section">
+                <label for="fileInput" class="btn-side secondary"><i class="fas fa-folder-open"></i> Chọn File Nguồn</label>
+                <input type="file" id="fileInput" accept=".bin" hidden>
+                <div id="fileNameDisplay">Chưa có file...</div>
+            </div>
+
+            <button onclick="startExternalSort()" class="btn-main"><i class="fas fa-bolt"></i> CHẠY SẮP XẾP</button>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-stats">
+                <div class="stat-item">Trạng thái: <span id="statusLabel" class="text-warning">Sẵn sàng</span></div>
+                <div class="stat-item">Tổng phần tử: <span id="totalElements">0</span></div>
+            </div>
+
+            <div class="vertical-layout">
+                <section class="card viz-section">
+                    <h3><i class="fas fa-layer-group"></i> Phase 1: Minh họa các Run (Sắp xếp nội bộ)</h3>
+                    <div id="runsContainer" class="runs-list"></div>
+                </section>
+
+                <section class="card result-section">
+                    <h3><i class="fas fa-code"></i> Phase 2: Kết quả cuối cùng (Sorted Array)</h3>
+                    <div id="arrayContainer" class="horizontal-array"></div>
+                    <div id="downloadArea"></div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="algo.js"></script>
+</body>
+</html>

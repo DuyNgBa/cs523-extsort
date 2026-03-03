@@ -1,0 +1,228 @@
+/* --- 1. Cấu hình màu sắc & Font chữ --- */
+:root {
+    --bg: #0b0f19;
+    --sidebar: #161b2a;
+    --accent: #10b981;
+    --card: #1f2937;
+    --text: #f8fafc;
+    --text-muted: #94a3b8;
+    --font-main: 'Inter', sans-serif;
+    --font-code: 'Fira Code', monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-main);
+    background: var(--bg);
+    color: var(--text);
+    overflow: hidden;
+}
+
+.dashboard {
+    display: flex;
+    height: 100vh;
+}
+
+/* --- 2. Sidebar & Logo --- */
+.sidebar {
+    width: 280px;
+    background: var(--sidebar);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-right: 1px solid #ffffff05;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #10b981, #34d399);
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Sửa lỗi cảnh báo vàng */
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- 3. Hệ thống Nút bấm--- */
+.btn-main,
+.btn-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+    transition: 0.2s ease;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Nút chính (Chạy sắp xếp) */
+.btn-main {
+    background: var(--accent);
+    color: #fff;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+}
+
+.btn-main:hover {
+    background: #059669;
+    transform: translateY(-1px);
+}
+
+/* Nút phụ (Tạo mẫu & Chọn file) */
+.btn-side {
+    background: #334155;
+    color: #fff;
+}
+
+.btn-side.secondary {
+    background: #475569;
+}
+
+.btn-side:hover {
+    background: #1e293b;
+}
+
+/* Phần upload file*/
+.file-upload-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#fileNameDisplay {
+    font-size: 11px;
+    color: var(--text-muted);
+    background: #00000050;
+    padding: 10px;
+    border-radius: 6px;
+    word-break: break-all;
+    border: 1px dashed #334155;
+    min-height: 34px;
+}
+
+/* --- 4. Bố cục Nội dung chính --- */
+.main-content {
+    flex: 1;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+
+.vertical-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    min-height: 0;
+}
+
+.card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #ffffff05;
+}
+
+/* Phase 1: Minh họa (Phía trên - Giới hạn chiều cao) */
+.viz-section {
+    flex: 0 0 45%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.runs-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+    padding-right: 8px;
+}
+
+.run-item {
+    background: #111827;
+    border-left: 4px solid var(--accent);
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: var(--font-code);
+}
+
+/* Phase 2: Kết quả (Phía dưới) */
+.result-section {
+    flex: 1;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.horizontal-array {
+    background: #000;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: var(--font-code);
+    color: var(--accent);
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-top: 10px;
+    border: 1px solid #333;
+    font-size: 15px;
+}
+
+.array-val {
+    color: #f1f5f9;
+}
+
+/* Thống kê*/
+.top-stats {
+    display: flex;
+    gap: 30px;
+    background: var(--card);
+    padding: 15px 25px;
+    border-radius: 12px;
+    border: 1px solid #ffffff05;
+}
+
+.stat-item {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.stat-item span {
+    color: #fff;
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+/* Tùy chỉnh thanh cuộn*/
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
