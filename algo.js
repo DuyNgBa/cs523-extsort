@@ -24,7 +24,7 @@ function generateSampleFile() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url; 
-    a.download = `sample_${count}_elements.bin`; 
+    a.download = `sample_data.bin`; 
     a.click();
 }
 
