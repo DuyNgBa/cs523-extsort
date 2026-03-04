@@ -1,33 +1,32 @@
-/* --- 1. Cấu hình màu sắc & Font chữ --- */
+/* --- 1. BIẾN TOÀN CỤC (Màu sắc & Font chữ) --- */
 :root {
-    --bg: #0b0f19;
-    --sidebar: #161b2a;
-    --accent: #10b981;
-    --card: #1f2937;
-    --text: #f8fafc;
+    --bg: #0b0f19;        
+    --sidebar: #161b2a;   
+    --accent: #10b981;    
+    --card: #1f2937;   
+    --text: #f8fafc;     
     --text-muted: #94a3b8;
     --font-main: 'Inter', sans-serif;
-    --font-code: 'Fira Code', monospace;
+    --font-code: 'Fira Code', monospace; 
 }
 
-* {
-    box-sizing: border-box;
-}
+/* Đảm bảo kích thước phần tử bao gồm cả padding và border để không bị tràn */
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
     font-family: var(--font-main);
     background: var(--bg);
     color: var(--text);
-    overflow: hidden;
+    overflow: hidden; /* Cố định màn hình, không cho cuộn toàn trang */
 }
 
 .dashboard {
-    display: flex;
+    display: flex; /* Chia trang thành 2 phần: Sidebar và Main Content */
     height: 100vh;
 }
 
-/* --- 2. Sidebar & Logo --- */
+/* --- 2. SIDEBAR (Thanh điều khiển) --- */
 .sidebar {
     width: 280px;
     background: var(--sidebar);
@@ -39,20 +38,38 @@ body {
 }
 
 .logo {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 800;
-    color: var(--accent);
-    margin-bottom: 20px;
+    text-transform: uppercase;
+    /* Hiệu ứng chữ màu Gradient xanh */
     background: linear-gradient(90deg, #10b981, #34d399);
     -webkit-background-clip: text;
     background-clip: text;
-    /* Sửa lỗi cảnh báo vàng */
     -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
 }
 
-/* --- 3. Hệ thống Nút bấm--- */
-.btn-main,
-.btn-side {
+/* ---Ô nhập số lượng tạo mẫu --- */
+.input-number {
+    width: 100%;
+    padding: 10px;
+    background: #00000050; 
+    border: 1px solid #334155;
+    border-radius: 6px;
+    color: var(--accent);
+    font-weight: bold;
+    font-family: var(--font-code);
+    outline: none;
+    margin-top: 5px;
+    transition: 0.3s;
+}
+
+.input-number:focus {
+    border-color: var(--accent); /* Đổi màu viền khi người dùng nhấn vào */
+}
+
+/* --- 3. HỆ THỐNG NÚT BẤM --- */
+.btn-main, .btn-side {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,58 +79,35 @@ body {
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
-    width: 100%;
+    width: 100%; /* Ép các nút luôn dài bằng chiều ngang Sidebar */
     transition: 0.2s ease;
-    font-size: 14px;
-    text-align: center;
 }
 
-/* Nút chính (Chạy sắp xếp) */
 .btn-main {
     background: var(--accent);
     color: #fff;
-    margin-top: 10px;
     box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
 }
 
 .btn-main:hover {
     background: #059669;
-    transform: translateY(-1px);
+    transform: translateY(-1px); /* Hiệu ứng nhấc nút lên khi di chuột */
 }
 
-/* Nút phụ (Tạo mẫu & Chọn file) */
-.btn-side {
-    background: #334155;
-    color: #fff;
-}
+.btn-side { background: #334155; color: #fff; }
+.btn-side.secondary { background: #475569; }
 
-.btn-side.secondary {
-    background: #475569;
-}
-
-.btn-side:hover {
-    background: #1e293b;
-}
-
-/* Phần upload file*/
-.file-upload-section {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
+/* Hiển thị tên tệp tin đã chọn */
 #fileNameDisplay {
     font-size: 11px;
     color: var(--text-muted);
     background: #00000050;
     padding: 10px;
     border-radius: 6px;
-    word-break: break-all;
-    border: 1px dashed #334155;
-    min-height: 34px;
+    border: 1px dashed #334155; 
 }
 
-/* --- 4. Bố cục Nội dung chính --- */
+/* --- 4. NỘI DUNG CHÍNH (Vùng minh họa) --- */
 .main-content {
     flex: 1;
     padding: 25px;
@@ -138,37 +132,34 @@ body {
     border: 1px solid #ffffff05;
 }
 
-/* Phase 1: Minh họa (Phía trên - Giới hạn chiều cao) */
+/* Phase 1: Hiển thị các Run xếp dọc */
 .viz-section {
-    flex: 0 0 45%;
-    min-height: 0;
+    flex: 0 0 45%; 
     display: flex;
     flex-direction: column;
 }
 
 .runs-list {
     flex: 1;
-    overflow-y: auto;
+    overflow-y: auto; /* Tạo thanh cuộn dọc khi có quá nhiều Run */
     display: flex;
     flex-direction: column;
     gap: 8px;
     margin-top: 10px;
-    padding-right: 8px;
 }
 
 .run-item {
     background: #111827;
-    border-left: 4px solid var(--accent);
+    border-left: 4px solid var(--accent); /* Vạch xanh bên trái để phân biệt từng Run */
     padding: 12px;
     border-radius: 4px;
     font-size: 13px;
     font-family: var(--font-code);
 }
 
-/* Phase 2: Kết quả (Phía dưới) */
+/* Phase 2: Hiển thị kết quả mảng dàn hàng ngang */
 .result-section {
     flex: 1;
-    min-height: 200px;
     display: flex;
     flex-direction: column;
 }
@@ -179,50 +170,26 @@ body {
     border-radius: 8px;
     font-family: var(--font-code);
     color: var(--accent);
-    overflow-x: auto;
-    white-space: nowrap;
-    margin-top: 10px;
+    overflow-x: auto;   /* Tạo thanh cuộn ngang khi mảng quá dài */
+    white-space: nowrap;/* Ngăn các số bị nhảy xuống dòng */
     border: 1px solid #333;
-    font-size: 15px;
 }
 
-.array-val {
-    color: #f1f5f9;
-}
+.array-val { color: #f1f5f9; }
 
-/* Thống kê*/
+/* Thống kê Header */
 .top-stats {
     display: flex;
     gap: 30px;
     background: var(--card);
     padding: 15px 25px;
     border-radius: 12px;
-    border: 1px solid #ffffff05;
 }
 
-.stat-item {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-muted);
-}
-
-.stat-item span {
-    color: #fff;
-    font-weight: 700;
-    margin-left: 5px;
-}
+.stat-item { font-size: 14px; color: var(--text-muted); }
+.stat-item span { color: #fff; font-weight: 700; margin-left: 5px; }
 
 /* Tùy chỉnh thanh cuộn*/
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #334155;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--accent);
-}
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }

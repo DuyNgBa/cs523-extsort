@@ -6,20 +6,29 @@ document.getElementById('fileInput').onchange = function() {
     document.getElementById('fileNameDisplay').innerText = this.files[0] ? this.files[0].name : "Chưa chọn file";
 }
 
-// 1. Hàm tạo file mẫu
+// 1. Hàm tạo file mẫu 
 function generateSampleFile() {
-    const buffer = new ArrayBuffer(20 * 8);
+    // Lấy số lượng từ ô input, mặc định là 20 nếu để trống
+    const count = parseInt(document.getElementById('genCount').value) || 20;
+    
+    // Mỗi số thực 8-byte cần 8 bytes trong bộ nhớ
+    const buffer = new ArrayBuffer(count * 8); 
     const view = new DataView(buffer);
-    for (let i = 0; i < 20; i++) {
+    
+    for (let i = 0; i < count; i++) {
+        // Tạo số thực ngẫu nhiên và lưu ở định dạng Float64 (8-byte)
         view.setFloat64(i * 8, Math.random() * 200 - 100, true);
     }
+    
     const blob = new Blob([buffer], { type: "application/octet-stream" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url; a.download = 'test_data.bin'; a.click();
+    a.href = url; 
+    a.download = `sample_${count}_elements.bin`; 
+    a.click();
 }
 
-// 2. Chạy thuật toán
+// 2. Chạy thuật toán (Giữ nguyên logic gọi API)
 async function startExternalSort() {
     const fileInput = document.getElementById('fileInput');
     if (!fileInput.files[0]) return alert("Vui lòng chọn file .bin trước!");
@@ -35,7 +44,6 @@ async function startExternalSort() {
         const response = await fetch('http://127.0.0.1:5000/sort', { method: 'POST', body: formData });
         const result = await response.json();
 
-        // Hiển thị các Run (PHÍA TRÊN)
         const runContainer = document.getElementById('runsContainer');
         runContainer.innerHTML = "";
         result.runs.forEach((run, i) => {
@@ -45,7 +53,6 @@ async function startExternalSort() {
             runContainer.appendChild(div);
         });
 
-        // Hiển thị Array Kết quả (PHÍA DƯỚI)
         const arrayContainer = document.getElementById('arrayContainer');
         arrayContainer.innerHTML = `<span style="color:#fff">[</span> ` + 
             result.sorted_result.map(n => `<span class="array-val">${n.toFixed(2)}</span>`).join(', ') + 
