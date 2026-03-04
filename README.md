@@ -5,6 +5,7 @@ MSSV: 24520382
 ## Cấu trúc:
 - `app.py`: Chứa logic xử lý tệp nhị phân số thực 8-byte
 - `index.html, style.css, algo.js`: Giao diện minh hoạ Phase 1 và Phase 2
+- `requirements.txt`: Chứa những thư viện cần thiết để sử dụng
 
 ## Cài đặt:
 1. Cài đặt thư viện: `pip install -r requirements.txt`
